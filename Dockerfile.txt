@@ -1,0 +1,17 @@
+# 1. Use Python 3.11 as the base
+FROM python:3.11-slim
+
+# 2. Set the working directory
+WORKDIR /app
+
+# 3. Copy the list of tools to install
+COPY requirements.txt .
+
+# 4. Install the tools (pytest, requests, etc.)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copy all your code files into the container
+COPY . .
+
+# 6. RUN THE TESTS BY DEFAULT (This is a specific requirement!)
+CMD ["python", "-m", "pytest", "-v"]
